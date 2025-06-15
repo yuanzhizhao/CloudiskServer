@@ -86,6 +86,8 @@ int parseCommand(const char* input, int len, train_t* pt){
         strncpy(pt->buff, pstrs[1], pt->len);
     }
 
+    // 
+    freeStrs(pstrs, cnt);
     return 0;
 }
 
