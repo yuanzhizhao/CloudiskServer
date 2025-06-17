@@ -3,7 +3,9 @@
 
 int main()
 {
-    int clientfd = tcpConnect("127.0.0.1", 8080);
+    const char* ip = "127.0.0.1";
+    int port = 8080;
+    int clientfd = tcpConnect(ip, port);
 
     // 用户登录操作
     // TODO
