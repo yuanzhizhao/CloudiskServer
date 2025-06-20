@@ -13,9 +13,10 @@ void readConfig(const char* filename, HashTable* ht){
 
         int cnt = 0;
         splitString(buff, "=", str, 3, &cnt);
-        char* value = (char*)calloc(1, strlen(str[1] +1));
-        strcpy(value, str[1]);
-        insert(ht, str[0], value);
+        //char* value = (char*)calloc(1, strlen(str[1] +1));
+        //strcpy(value, str[1]);
+        //insert(ht, str[0], value);
+        insert(ht, str[0], str[1]);
         freeStrs(str, cnt);
     }
 

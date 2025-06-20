@@ -26,13 +26,15 @@ void insert(HashTable* ht, const char* key, void* value){
     while(ht->table[index].value != EMPTY){
         index = (index+1)%MAX_SIZE;
         if(strcmp(ht->table[index].key, key) == 0){
-            ht->table[index].value = value;
+            //ht->table[index].value = value;
+            ht->table[index].value = calloc(1, sizeof(void*));
+            strcpy((char*)ht->table[index].value, (const char*)value);
             return;
         }
     }
 
-    strcpy(ht->table[ht->size].key, key);
-    ht->table[ht->size].value = value; 
+    strcpy(ht->table[index].key, key);
+    ht->table[index].value = value; 
     ht->size++;
 }
 
