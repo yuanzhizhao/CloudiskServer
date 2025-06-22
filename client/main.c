@@ -53,6 +53,8 @@ int main()
                     if(ret == 0){
                         printf("byebye.\n");
                         break;
+                    }else if(ret == 1){
+                        continue;
                     }
                     memset(&t, 0, sizeof(t));
 
@@ -62,10 +64,17 @@ int main()
                     sendn(clientfd, (const char*)&t, 4 + 4 + t.len);
                     if(t.type == CMD_TYPE_PUTS){
                         putsCommand(clientfd, &t);
+                    }else if(t.type == CMD_TYPE_GETS){
+                        getsCommand(clientfd, &t);
                     }
                 }else if(fd == clientfd){
                     // TODO
-                    recv(clientfd, buf, sizeof(buf), 0);
+                    memset(buf, 0, sizeof(buf));
+                    int ret = recv(clientfd, buf, sizeof(buf), 0);
+                    if(ret == 0){
+                        printf("closed connect.\n");
+                        exit(1);
+                    }
                     printf("recv: %s\n", buf);
                 }else{
                     continue;

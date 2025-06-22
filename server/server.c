@@ -23,10 +23,20 @@ int tcpInit(const char* ip, const char* port){
     serveraddr.sin_addr.s_addr = inet_addr(ip);
     ret = bind(listenfd, (const struct sockaddr*)&serveraddr, sizeof(serveraddr));
     if(ret < 0){
+        perror("bind");
+        close(listenfd);
+        return -1;
+    }
+
+    // 监听
+    ret = listen(listenfd, 100);
+    if(ret<0){
         perror("listen");
         close(listenfd);
         return -1;
     }
+
+    printf("server starts to listen...\n");
 
     return listenfd;
 }
@@ -86,7 +96,7 @@ int recvn(int sockfd, void * buff, int len){
     char* curBuff= (char*)buff;
 
     while(left > 0){
-        ret = recv(sockfd, buff, left, 0);
+        ret = recv(sockfd, curBuff, left, 0);
         if(ret == 0){
             break;
         }else if(ret < 0){

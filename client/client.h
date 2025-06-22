@@ -31,3 +31,4 @@ int parseCommand(const char* input, int len, train_t* pt);
 // 
 CmdType getCommandType(const char* str);
 void putsCommand(int sockfd, train_t* pt);
+void getsCommand(int sockfd, train_t* pt);

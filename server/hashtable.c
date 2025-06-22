@@ -34,7 +34,8 @@ void insert(HashTable* ht, const char* key, void* value){
     }
 
     strcpy(ht->table[index].key, key);
-    ht->table[index].value = value; 
+    ht->table[index].value = calloc(1, sizeof(void*));
+    strcpy(ht->table[index].value, value);
     ht->size++;
 }
 
@@ -83,8 +84,8 @@ void destroyHashTable(HashTable* ht){
     for(int index=0; index<MAX_SIZE; ++index){
         if(ht->table[index].value != EMPTY){
             strcpy(ht->table[index].key, "");
-            ht->table[index].value = EMPTY;
             free(ht->table[index].value);
+            ht->table[index].value = EMPTY;
             ht->size--;
         }
     }

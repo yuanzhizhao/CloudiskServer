@@ -1,6 +1,7 @@
 #pragma once
 #include<func.h>
 #include"str_util.h"
+#include<dirent.h>
 
 typedef enum {
     CMD_TYPE_PWD=1,
@@ -86,6 +87,9 @@ void lsCommand(task_t* task);
 void pwdCommand(task_t* task);
 void mkdirCommand(task_t* task);
 void rmdirCommand(task_t* task);
+void notCommand(task_t * task);
+void putsCommand(task_t * task);
+void getsCommand(task_t * task);
 
 
 // 用户登录相关功能
